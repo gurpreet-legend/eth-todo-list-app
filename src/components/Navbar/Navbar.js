@@ -1,4 +1,4 @@
-const Navbar = () => {
+const Navbar = ({account}) => {
     return (
 
         <nav className="bg-slate-900">
@@ -6,7 +6,7 @@ const Navbar = () => {
                 <div className="relative flex items-center justify-between h-16">
                     
                     <div className="flex">
-                        <div className="flex-shrink-0 flex items-center">
+                        <div className="flex items-center grow">
                             <img className="block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow" />
                             <span className="text-white text-2xl font-bold ml-2">Eth-Todo-List</span>
                         </div>
@@ -14,8 +14,7 @@ const Navbar = () => {
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                       
-
-                        {/* <!-- Profile dropdown --> */}
+                        <div className="text-gray-400 hidden md:block">Your Account: {account}</div>
                         <div className="ml-3 relative">
                             <div>
                                 <button type="button" className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
