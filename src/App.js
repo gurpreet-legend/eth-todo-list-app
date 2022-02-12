@@ -9,7 +9,7 @@ import { TODOLIST_ABI, TODOLIST_CONTRACT_ADDRESS } from './config'
 function App() {
   //States
   const [tasks, setTasks] = useState([]);
-  console.log(tasks);
+  // console.log(tasks);
   const [taskCount, setTaskCount] = useState(0);
   const [account, setAccount] = useState('');
   const [methods, setMethods] = useState([]);
@@ -20,21 +20,24 @@ function App() {
   
     //Connecting the MetaMask account:
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    // console.log(accounts);
   
     //Connecting to the Smart Contract:
     const contract = new web3.eth.Contract(TODOLIST_ABI, TODOLIST_CONTRACT_ADDRESS);
   
     //Getting the data from the smart contract:
-    const taskCount = await contract.methods.taskCount().call();
+    let taskCount = await contract.methods.taskCount().call();
     const methods = await contract.methods;
     
+    let taskArr = [];
     for (let i = 1; i <= taskCount; i++) {
       const task = await contract.methods.tasks(i).call();
-      setTasks([...tasks, task])
+      taskArr.push(task)
     }
 
+    // console.log(taskArr);
+    
     //Updating the states
+    setTasks([...taskArr]);
     setAccount(accounts[0]);
     setTaskCount(taskCount);
     setMethods(methods);
@@ -50,8 +53,8 @@ function App() {
     <div>
       <Navbar account={account}/>
       <div className='container mx-auto my-10 flex flex-col space-y-10 p-6'>
-        <Input methods={methods}/>
-        <TaskList tasks={tasks} />
+        <Input methods={methods} account={account}/>
+        <TaskList methods={methods} tasks={tasks} account={account}/>
       </div>
     </div>
   );

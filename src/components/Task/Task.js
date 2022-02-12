@@ -1,11 +1,12 @@
-const Task = ({taskNumber, taskContent, completed}) => {
+const Task = ({taskNumber, taskContent, completed, toggleCompleted}) => {
+
     return (
         <>
-            < div className="relative bg-white border border-gray-300 hover:ring-2 hover:ring-indigo-500 rounded-lg p-4 flex cursor-pointer" >
+            < div onClick={()=> toggleCompleted(taskNumber)} className="relative bg-white border border-gray-300 hover:ring-2 hover:ring-indigo-500 rounded-lg p-4 flex cursor-pointer" >
                 <div className="flex-1 flex">
                     <div className="flex flex-col">
                         <span id="project-type-0-label" className="block text-sm font-medium text-gray-900"> Task {taskNumber} : </span>
-                        <span id="project-type-0-description-0" className="mt-1 flex items-center text-sm text-gray-500"> {taskContent} </span>
+                        <span id="project-type-0-description-0" className={completed?"mt-1 flex items-center text-sm text-gray-500 line-through": "mt-1 flex items-center text-sm text-gray-500"}> {taskContent} </span>
                     </div>
                 </div>
                 {
